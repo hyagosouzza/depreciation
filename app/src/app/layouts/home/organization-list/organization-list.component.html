@@ -1,0 +1,56 @@
+<mat-card>
+	<mat-card-title>
+		<span class="gray-color">Suas Organizações</span>
+		<hr>
+	</mat-card-title>
+	<div class="content-around flex-direction-row">
+		<mat-card style="min-width: 40%" *ngFor="let org of organizations">
+			<mat-card-title>
+				<div class="content-between">
+					<div *ngIf="orgToEdit != org.id">
+						<mat-icon class="menu-icon" aria-hidden="false">business</mat-icon>
+						{{ org.name }}
+					</div>
+					<div *ngIf="orgToEdit == org.id">
+						<mat-form-field>
+							<input matInput type="text"
+								   [(ngModel)]="name"
+								   name="orgName">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-icon *ngIf="orgToEdit != org.id" style="margin-right: 10px"
+								  color="primary" class="menu-icon"
+								  aria-hidden="false" (click)="toogleEdit(org.id)">
+							edit
+						</mat-icon>
+						<mat-icon *ngIf="orgToEdit == org.id"
+								  color="primary" class="menu-icon"
+								  aria-hidden="false" (click)="editOrganization(org)">
+							check
+						</mat-icon>
+						<mat-icon *ngIf="orgToEdit == org.id"
+								  color="warn" class="menu-icon"
+								  aria-hidden="false" (click)="toogleEdit()">
+							close
+						</mat-icon>
+						<mat-icon *ngIf="orgToEdit != org.id" color="warn" class="menu-icon"
+								  aria-hidden="false"
+								  (click)="openDialog(org.id)">delete
+						</mat-icon>
+					</div>
+				</div>
+			</mat-card-title>
+			<div class="content-center">
+				<div>
+					<p>0 Bens Patrimoniais Cadastrados</p>
+				</div>
+			</div>
+			<mat-card-actions>
+				<div class="content-end">
+					<button mat-stroked-button color="primary">Ver organização</button>
+				</div>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</mat-card>

@@ -1,0 +1,45 @@
+<mat-card>
+	<mat-card-title>
+		<span class="gray-color">Seu Perfil</span>
+		<hr>
+	</mat-card-title>
+	<mat-card-content>
+		<div class="content-around flex-direction-row">
+			<div>
+				<img src="https://img.icons8.com/ultraviolet/40/000000/checked-user-male.png">
+			</div>
+			<div>
+				<form>
+					<mat-form-field style="width: 100%">
+						<input matInput type="email"
+							   [(ngModel)]="user.name"
+							   name="name"
+							   [readonly]="!updateEnable"
+							   [disabled]="!updateEnable">
+						<mat-placeholder class="placeholder">Nome</mat-placeholder>
+					</mat-form-field>
+					<mat-form-field style="width: 100%">
+						<input matInput type="email"
+							   [(ngModel)]="user.email"
+							   name="email"
+							   [readonly]="!updateEnable"
+							   [disabled]="!updateEnable">
+						<mat-placeholder class="placeholder">Email</mat-placeholder>
+					</mat-form-field>
+				</form>
+			</div>
+		</div>
+	</mat-card-content>
+	<mat-card-actions>
+		<div style="margin-top: 20px" class="content-center">
+			<button *ngIf="!updateEnable" mat-raised-button color="primary" (click)="toogleUpdate()">Habilitar Edição</button>
+			<button *ngIf="updateEnable" mat-raised-button color="primary" (click)="updateUser()">Salvar Edição</button>
+			<button *ngIf="updateEnable" mat-raised-button color="warn" (click)="toogleUpdate()">Cancelar Edição</button>
+		</div>
+	</mat-card-actions>
+	<mat-card-footer>
+		<div style="padding: 20px" class="content-end">
+			<button mat-stroked-button color="primary" (click)="resetPassword()">Redefinir Senha</button>
+		</div>
+	</mat-card-footer>
+</mat-card>

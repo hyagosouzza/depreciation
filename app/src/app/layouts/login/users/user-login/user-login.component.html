@@ -1,0 +1,47 @@
+<div class="content-center h-100">
+	<div>
+		<mat-card style="min-width: 500px" class="bg-base-dark">
+			<mat-card-title class="white-color text-center">Login</mat-card-title>
+			<hr class="horizontal-row">
+			<mat-card-content>
+				<div class="content-column">
+					<div>
+						<form>
+							<mat-form-field style="width: 100%">
+								<input matInput type="email"
+									   [(ngModel)]="email"
+									   name="email">
+								<mat-placeholder class="placeholder">Email</mat-placeholder>
+							</mat-form-field>
+							<mat-form-field style="width: 100%">
+								<input matInput [type]="hide ? 'password' : 'text'"
+									   [(ngModel)]="password"
+									   name="password">
+								<mat-placeholder class="placeholder">Senha</mat-placeholder>
+								<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+									<mat-icon class="white-color">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+								</button>
+							</mat-form-field>
+
+						</form>
+					</div>
+				</div>
+			</mat-card-content>
+			<mat-card-actions>
+				<div class="content-center actions-login">
+					<div>
+						<button
+								(keyup.enter)="signIn()"
+								[disabled]="disableForm" mat-raised-button color="primary"
+								(click)="signIn()">Entrar
+						</button>
+					</div>
+					<div>
+						<a class="white-color" routerLink="/register">Registrar</a>
+					</div>
+				</div>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>
+

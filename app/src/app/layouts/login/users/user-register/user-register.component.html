@@ -1,0 +1,44 @@
+<div class="content-center h-100">
+	<div>
+		<mat-card style="min-width: 500px" class="bg-base-dark">
+			<mat-card-title class="white-color text-center">Registrar</mat-card-title>
+			<hr class="horizontal-row">
+			<mat-card-content>
+				<div class="content-column">
+					<div>
+						<form>
+							<mat-form-field style="width: 100%">
+								<input matInput type="email"
+									   [(ngModel)]="email"
+									   name="email">
+								<mat-placeholder class="placeholder">Email</mat-placeholder>
+							</mat-form-field>
+							<mat-form-field style="width: 100%">
+								<input matInput type="password"
+									   [(ngModel)]="password"
+									   name="password">
+								<mat-placeholder class="placeholder">Senha</mat-placeholder>
+							</mat-form-field>
+
+						</form>
+					</div>
+				</div>
+			</mat-card-content>
+			<mat-card-actions>
+				<div class="content-center actions-login">
+					<div>
+						<button
+								(keyup.enter)="signUp()"
+								[disabled]="disableForm" mat-raised-button color="primary"
+								(click)="signUp()">Registrar
+						</button>
+					</div>
+					<div>
+						<a class="white-color" routerLink="/">Voltar</a>
+					</div>
+				</div>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>
+

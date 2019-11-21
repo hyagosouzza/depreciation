@@ -1,0 +1,23 @@
+@import "../../../../../assets/sass/variables";
+
+.horizontal-row {
+	height: 3px;
+	background-color: $base-blue-color;
+	border: none;
+}
+
+.actions-login {
+	flex-direction: column;
+
+	div {
+		margin-bottom: 20px;
+	}
+}
+
+.content-column.h-100 {
+	margin-top: 20px;
+}
+
+input, ::placeholder {
+	color: whitesmoke;
+}

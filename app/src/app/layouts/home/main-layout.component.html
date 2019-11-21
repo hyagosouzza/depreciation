@@ -1,0 +1,14 @@
+<mat-drawer-container class="sidenav-container">
+	<mat-drawer #drawer class="sidenav" mode="side">
+		<app-menu></app-menu>
+	</mat-drawer>
+
+	<app-navbar (toogleDrawer)="drawer.toggle()"></app-navbar>
+	<div class="content-center h-100">
+		<div class="main-card">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+
+</mat-drawer-container>
+

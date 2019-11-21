@@ -1,0 +1,16 @@
+<mat-card *ngIf="!organizations || organizations.length == 0; else orgs">
+	<div class="content-center">
+		<div>
+			<mat-icon class="menu-icon add-org" aria-hidden="false">add</mat-icon>
+		</div>
+		<div>
+			<i>Você ainda não possui organizações cadastradas.</i>
+		</div>
+		<div>
+			<button mat-stroked-button color="primary" (click)="openDialog()">Nova organização</button>
+		</div>
+	</div>
+</mat-card>
+<ng-template #orgs>
+	<app-organization-list></app-organization-list>
+</ng-template>

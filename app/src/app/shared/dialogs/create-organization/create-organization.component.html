@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Qual o nome da Organização?</h1>
+<div mat-dialog-content>
+	<mat-form-field>
+		<input matInput [(ngModel)]="name" (keyup.enter)="dialogRef.close(name)">
+	</mat-form-field>
+</div>
+<div mat-dialog-actions class="content-between">
+	<button mat-stroked-button mat-button color="warn" (click)="close()">Cancelar</button>
+	<button mat-raised-button mat-button color="primary"
+			[mat-dialog-close]="name" cdkFocusInitia
+			[disabled]="name?.length == 0">Salvar
+	</button>
+</div>
