@@ -12,5 +12,5 @@
 	</div>
 </mat-card>
 <ng-template #orgs>
-	<app-organization-list></app-organization-list>
+	<app-organization-list (deleteOrganization)="fetchOrganizations()" (createOrganization)="openDialog()"></app-organization-list>
 </ng-template>

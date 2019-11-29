@@ -50,7 +50,7 @@ body {
 }
 
 .bg-base-dark {
-	background-color: $base-dark-color;
+	background-color: $base-green-color;
 }
 
 .white-color {
@@ -89,31 +89,14 @@ body {
 	display: initial;
 }
 
-.mat-focused .mat-form-field-label {
-	/*change color of label*/
-	color: $base-blue-color !important;
-}
-
-.mat-form-field-underline {
-	/*change color of underline*/
-	background-color: $base-blue-color !important;
-}
-
-.mat-form-field-ripple {
-	/*change color of underline when focused*/
-	background-color: $base-blue-color !important;;
-}
-
 .flex-direction-column {
+	display: flex;
 	flex-direction: column;
 }
 
 .flex-direction-row {
+	display: flex;
 	flex-direction: row;
-}
-
-.placeholder {
-	color: whitesmoke;
 }
 
 .mat-toolbar {

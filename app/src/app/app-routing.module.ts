@@ -6,34 +6,36 @@ import { UserRegisterComponent } from './layouts/login/users/user-register/user-
 import { MainLayoutComponent } from './layouts/home/main-layout.component';
 import { ProfileComponent } from './layouts/home/profile/profile.component';
 import { HomeComponent } from './layouts/home/home/home.component';
+import { CreateAssetComponent } from './layouts/home/asset/create/create-asset.component';
+import { ListAssetsComponent } from './layouts/home/asset/list/list-assets.component';
 
 const routes: Routes = [
-	{
-		path: 'home',
-		component: MainLayoutComponent,
-		children: [
-			{ path: '', component: HomeComponent },
-			{ path: 'profile', component: ProfileComponent },
-		]
-	},
+  {
+    path: 'home',
+    component: MainLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'bens', component: ListAssetsComponent },
+      { path: 'bens/novo', component: CreateAssetComponent },
+    ]
+  },
 
-	{
-		path: '',
-		component: LoginLayoutComponent,
-		children: [
-			{ path: 'login', component: UserLoginComponent },
-			{ path: 'register', component: UserRegisterComponent }
-		]
-	},
+  {
+    path: '',
+    component: LoginLayoutComponent,
+    children: [
+      { path: '', component: UserLoginComponent },
+      { path: 'register', component: UserRegisterComponent }
+    ]
+  },
 
-	//no layout routes
-
-	// otherwise redirect to home
-	{ path: '**', redirectTo: '' }
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule ({
-	imports: [RouterModule.forRoot (routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot (routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

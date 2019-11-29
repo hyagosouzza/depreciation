@@ -1,5 +1,5 @@
-export class Organization {
-	id: string;
-	user: string;
-	name: string;
+export interface Organization {
+  id?: string;
+  user?: string;
+  name?: string;
 }

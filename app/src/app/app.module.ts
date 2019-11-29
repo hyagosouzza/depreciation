@@ -25,52 +25,73 @@ import { CreateOrganizationComponent } from './shared/dialogs/create-organizatio
 import { OrganizationService } from './services/organization.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MenuComponent } from './layouts/home/menu/menu.component';
-import { OrganizationListComponent } from './layouts/home/organization-list/organization-list.component';
+import { OrganizationListComponent } from './layouts/home/organization/list/organization-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ConfirmComponent } from './shared/dialogs/confirm/confirm.component';
 import { ProfileComponent } from './layouts/home/profile/profile.component';
 import { HomeComponent } from './layouts/home/home/home.component';
+import { CreateAssetComponent } from './layouts/home/asset/create/create-asset.component';
+import { ListAssetsComponent } from './layouts/home/asset/list/list-assets.component';
+import { MatDatepickerModule, MatMenuModule, MatNativeDateModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { MetadadosService } from './services/metadados.service';
+import { NgxCurrencyModule } from 'ngx-currency';
+import { DesactiveAssetDialogComponent } from './shared/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
+import { AssetInfoDialogComponent } from './shared/dialogs/asset-info-dialog/asset-info-dialog.component';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule ({
-	declarations: [
-		AppComponent,
-		MainLayoutComponent,
-		LoginLayoutComponent,
-		UserLoginComponent,
-		UserRegisterComponent,
-		MenuComponent,
-		OrganizationListComponent,
-		ProfileComponent,
-		HomeComponent,
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
+  declarations: [
+    AppComponent,
+    MainLayoutComponent,
+    LoginLayoutComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    MenuComponent,
+    OrganizationListComponent,
+    ProfileComponent,
+    HomeComponent,
+    CreateAssetComponent,
+    ListAssetsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
 
-		RouterModule.forRoot ([]),
-		SharedModule,
+    NgxMaskModule.forRoot (options),
+    NgxCurrencyModule,
 
-		AppRoutingModule,
-		AngularFireModule.initializeApp (environment.firebase),
-		AngularFirestoreModule,
-		AngularFireAuthModule,
+    RouterModule.forRoot ([]),
+    SharedModule,
+    AppRoutingModule,
 
-		MatSidenavModule,
-		MatCheckboxModule,
-		FormsModule,
-		MatCardModule,
-		MatButtonModule,
-		MatInputModule,
-		MatIconModule,
-		MatListModule,
-		MatToolbarModule,
-	],
-	providers: [
-		AuthService,
-		OrganizationService,
-	],
-	entryComponents: [CreateOrganizationComponent, ConfirmComponent],
-	bootstrap: [AppComponent]
+    AngularFireModule.initializeApp (environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+
+    MatSidenavModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMenuModule,
+  ],
+  providers: [
+    AuthService,
+    OrganizationService,
+    MetadadosService,
+  ],
+  entryComponents: [CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

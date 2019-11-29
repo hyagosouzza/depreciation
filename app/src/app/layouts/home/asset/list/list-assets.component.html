@@ -1,0 +1,49 @@
+<mat-card>
+	<mat-card-title>
+		<span class="gray-color">Bens Patrimoniais Cadastrados</span>
+		<hr>
+	</mat-card-title>
+	<div class="content-center flex-direction-row">
+		<mat-card-content style="width: 70%">
+			<mat-nav-list *ngIf="assets || assets?.length > 0; else noList">
+				<mat-list>
+					<mat-list-item (dblclick)="openAssetInfoDialog(asset)"
+								   *ngFor="let asset of assets">
+						<h4 mat-line>{{ asset.name }}</h4>
+						<p mat-line> {{ asset.category }} </p>
+						<mat-action-list>
+							<button mat-button [matMenuTriggerFor]="afterMenu">
+								<mat-icon mat-list-icon style="color: #007aff">more_vert</mat-icon>
+							</button>
+							<mat-menu #afterMenu="matMenu" xPosition="after">
+								<button mat-menu-item (click)="openAssetInfoDialog(asset, true)">
+									<mat-icon mat-list-icon color="primary">edit</mat-icon>
+									Editar
+								</button>
+								<button mat-menu-item (click)="delete(asset.id)">
+									<mat-icon mat-list-icon color="warn">delete</mat-icon>
+									Remover
+								</button>
+								<button *ngIf="!asset.desactive?.desactivated; else activate" mat-menu-item (click)="openDesactiveDialog(asset)">
+									<mat-icon mat-list-icon color="gray">block</mat-icon>
+									Desativar
+								</button>
+								<ng-template #activate>
+									<button mat-menu-item (click)="reactive(asset)">
+										<mat-icon mat-list-icon style="color: #3DA35D">refresh</mat-icon>
+										Reativar
+									</button>
+								</ng-template>
+							</mat-menu>
+						</mat-action-list>
+
+					</mat-list-item>
+				</mat-list>
+
+			</mat-nav-list>
+			<ng-template #noList>
+				<p><i>Não há bens patrimoniais cadastrados</i></p>
+			</ng-template>
+		</mat-card-content>
+	</div>
+</mat-card>

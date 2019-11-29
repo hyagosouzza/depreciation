@@ -1,0 +1,64 @@
+<h1 class="gray-color" mat-dialog-title>Bem Patrimonial</h1>
+<hr style="margin-top: 0; margin-bottom: 30px">
+<div mat-dialog-content>
+	<form #form="ngForm">
+		<div class="content-between flex-direction-row">
+			<div>
+				<mat-form-field>
+					<input [readonly]="!editing" name="code" [(ngModel)]="asset.code" matInput placeholder="Código do Patrimônio">
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field>
+					<input [readonly]="!editing" name="name" [(ngModel)]="asset.name" required matInput placeholder="Nome">
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="content-between flex-direction-row">
+			<div>
+				<mat-form-field>
+					<input [readonly]="!editing" name="value" [(ngModel)]="asset.value"
+						   required matInput placeholder="Valor emitido na nota fiscal"
+						   currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field>
+					<input [disabled]="!editing" name="date" [(ngModel)]="date" (ngModelChange)="formatDate()" required matInput [matDatepicker]="picker" [placeholder]="placeholderDate">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="content-between flex-direction-row">
+			<div>
+				<mat-form-field>
+					<mat-select [disabled]="!editing" name="category" [(ngModel)]="asset.category" required placeholder="Categoria">
+						<mat-option disabled selected [value]="null">Selecione uma Categoria</mat-option>
+						<mat-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field>
+					<mat-select [disabled]="!editing" name="org" [(ngModel)]="asset.organization" required placeholder="Setor">
+						<mat-option disabled selected [value]="null">Selecione um setor</mat-option>
+						<mat-option *ngFor="let org of organizations" [value]="org.id">{{ org.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+	</form>
+	<div *ngIf="!editing && asset.desactive?.desactivated">
+		<h3 class="gray-color">Desativado</h3>
+		<p class="gray-color"><b>Motivo:</b> {{ asset.desactive?.reason }}</p>
+		<p class="gray-color"><b>Data de Desativação:</b> {{ asset.desactive?.date.toDate().toLocaleDateString()}}</p>
+	</div>
+</div>
+<div *ngIf="editing" mat-dialog-actions class="content-between">
+	<button mat-stroked-button mat-button color="warn" (click)="close()">Cancelar</button>
+	<button mat-raised-button mat-button color="primary"
+			[mat-dialog-close]="asset" cdkFocusInitia
+			[disabled]="form.invalid">Editar
+	</button>
+</div>

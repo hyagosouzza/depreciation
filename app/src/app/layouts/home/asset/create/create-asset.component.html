@@ -1,0 +1,61 @@
+<mat-card>
+	<mat-card-title>
+		<span class="gray-color">Criar Bem Patrimonial</span>
+		<hr>
+	</mat-card-title>
+	<div class="content-center flex-direction-row">
+		<mat-card-content style="width: 70%">
+			<form #newAsset="ngForm" (ngSubmit)="createAsset(newAsset)">
+				<div class="content-between flex-direction-row">
+					<div>
+						<mat-form-field>
+							<input name="code" [(ngModel)]="asset.code" matInput placeholder="Código do Patrimônio">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field>
+							<input name="name" [(ngModel)]="asset.name" required matInput placeholder="Nome">
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="content-between flex-direction-row">
+					<div>
+						<mat-form-field>
+							<input name="value" [(ngModel)]="asset.value"
+								   required matInput placeholder="Valor emitido na nota fiscal"
+								   currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field>
+							<input name="date" [(ngModel)]="asset.date" required matInput [matDatepicker]="picker" placeholder="Data de fabricação">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="content-between flex-direction-row">
+					<div>
+						<mat-form-field>
+							<mat-select name="category" [(ngModel)]="asset.category" required placeholder="Categoria">
+								<mat-option disabled selected [value]="null">Selecione uma Categoria</mat-option>
+								<mat-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field>
+							<mat-select name="org" [(ngModel)]="asset.organization" required placeholder="Setor">
+								<mat-option disabled selected [value]="null">Selecione um setor</mat-option>
+								<mat-option *ngFor="let org of organizations" [value]="org.id">{{ org.name }}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+				<div align="right" style="margin-top: 20px">
+					<button mat-raised-button color="primary" type="submit">Salvar</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</div>
+</mat-card>

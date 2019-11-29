@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Qual o motivo da desativação?</h1>
+<div mat-dialog-content>
+	<mat-form-field class="w-100">
+		<mat-select name="org" [(ngModel)]="reason" required placeholder="Motivo">
+			<mat-option disabled selected [value]="null">Selecione um motivo</mat-option>
+			<mat-option *ngFor="let r of reasons" [value]="r">{{ r }}</mat-option>
+		</mat-select>
+	</mat-form-field>
+</div>
+<div mat-dialog-actions class="content-between">
+	<button mat-stroked-button mat-button color="warn" (click)="close()">Cancelar</button>
+	<button mat-raised-button mat-button color="primary"
+			[mat-dialog-close]="reason" cdkFocusInitia
+			[disabled]="reason?.length == 0">Desativar
+	</button>
+</div>
