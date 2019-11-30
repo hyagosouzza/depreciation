@@ -8,7 +8,7 @@
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
-		"postinstall": "ng build --aot -prod"
+		"heroku-postbuild": "bash build.sh"
 	},
 	"private": true,
 	"dependencies": {
@@ -28,6 +28,7 @@
 		"hammerjs": "^2.0.8",
 		"lodash": "^4.17.15",
 		"ngx-currency": "^2.0.2",
+		"ngx-filter-pipe": "^2.1.2",
 		"ngx-mask": "^8.1.6",
 		"path": "^0.12.7",
 		"rxjs": "~6.4.0",
@@ -57,7 +58,7 @@
 		"typescript": "~3.5.3"
 	},
 	"engines": {
-		"node": "6.11.0",
-		"npm": "3.10.10"
+		"node": "10.16.0",
+		"npm": "6.9.0"
 	}
 }
