@@ -39,8 +39,11 @@ import { MetadadosService } from './services/metadados.service';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { DesactiveAssetDialogComponent } from './shared/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
 import { AssetInfoDialogComponent } from './shared/dialogs/asset-info-dialog/asset-info-dialog.component';
-
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { FiltersComponent } from './layouts/home/asset/list/filters/filters.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule ({
 	declarations: [
@@ -55,12 +58,13 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
 		HomeComponent,
 		CreateAssetComponent,
 		ListAssetsComponent,
+		FiltersComponent,
 	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
 
-		NgxMaskModule.forRoot (options),
+		NgxMaskModule.forRoot (),
 		NgxCurrencyModule,
 
 		RouterModule.forRoot ([]),
@@ -85,6 +89,10 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
 		MatDatepickerModule,
 		MatNativeDateModule,
 		MatMenuModule,
+		FilterPipeModule,
+		MatTableModule,
+		MatSortModule,
+		MatTooltipModule,
 	],
 	providers: [
 		AuthService,

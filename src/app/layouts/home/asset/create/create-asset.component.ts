@@ -25,11 +25,11 @@ export class CreateAssetComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this._loadAssets ();
+		this._loadMetadados ();
 		this._loadOrganizations ();
 	}
 
-	private async _loadAssets() {
+	private async _loadMetadados() {
 		this.categories = (await this._metadadosService.fetchAllAssets ()).data ().categories as AssetCategory[];
 	}
 

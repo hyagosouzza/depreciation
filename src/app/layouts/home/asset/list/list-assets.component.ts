@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AssetService } from '../../../../services/asset.service';
 import { Asset } from '../../../../models/asset.model';
 import { MatDialog } from '@angular/material';
@@ -7,6 +7,8 @@ import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
 import { ConfirmComponent } from '../../../../shared/dialogs/confirm/confirm.component';
 import { AssetInfoDialogComponent } from '../../../../shared/dialogs/asset-info-dialog/asset-info-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component ({
 	selector: 'app-list',
@@ -17,10 +19,18 @@ export class ListAssetsComponent implements OnInit {
 
 	assets: Asset[];
 
+	displayedColumns: string[] = ['name', 'category', 'value', 'date', 'options'];
+	dataSource: MatTableDataSource<Asset>;
+
+	@ViewChild (MatSort, { static: true }) sort: MatSort;
+
 	constructor(private readonly _assetService: AssetService,
 				public dialog: MatDialog) { }
 
 	ngOnInit() {
+		if (this.dataSource) {
+			this.dataSource.sort = this.sort;
+		}
 		this._loadAssets ();
 	}
 
@@ -31,6 +41,7 @@ export class ListAssetsComponent implements OnInit {
 			asset.id = doc.id;
 			return asset;
 		}) as Asset[];
+		this.dataSource = new MatTableDataSource (this.assets);
 	}
 
 	delete(id: string) {

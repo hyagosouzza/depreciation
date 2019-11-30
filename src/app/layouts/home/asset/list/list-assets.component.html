@@ -4,43 +4,65 @@
 		<hr>
 	</mat-card-title>
 	<div class="content-center flex-direction-row">
-		<mat-card-content style="width: 70%">
-			<mat-nav-list *ngIf="assets || assets?.length > 0; else noList">
-				<mat-list>
-					<mat-list-item (dblclick)="openAssetInfoDialog(asset)"
-								   *ngFor="let asset of assets">
-						<h4 mat-line>{{ asset.name }}</h4>
-						<p mat-line> {{ asset.category }} </p>
-						<mat-action-list>
-							<button mat-button [matMenuTriggerFor]="afterMenu">
-								<mat-icon mat-list-icon style="color: #007aff">more_vert</mat-icon>
+		<mat-card-content style="width: 90%">
+			<app-filters></app-filters>
+
+			<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> Nome</th>
+					<td style="cursor: pointer" mat-cell *matCellDef="let asset" (dblclick)="openAssetInfoDialog(asset)"> {{asset.name}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="category">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria</th>
+					<td mat-cell *matCellDef="let asset">
+						{{asset.category}}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="value">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> Valor</th>
+					<td mat-cell *matCellDef="let asset"> {{asset.value | currency}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="date">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> Data de Aquisição</th>
+					<td mat-cell *matCellDef="let asset"> {{asset.date.toDate().toLocaleDateString()}} </td>
+				</ng-container>
+
+				<ng-container class="text-right" matColumnDef="options">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+					<td style="text-align: right" mat-cell *matCellDef="let asset">
+						<button mat-button [matMenuTriggerFor]="afterMenu">
+							<mat-icon mat-list-icon style="color: #007aff">more_vert</mat-icon>
+						</button>
+						<mat-menu #afterMenu="matMenu" xPosition="after">
+							<button mat-menu-item (click)="openAssetInfoDialog(asset, true)">
+								<mat-icon mat-list-icon color="primary">edit</mat-icon>
+								Editar
 							</button>
-							<mat-menu #afterMenu="matMenu" xPosition="after">
-								<button mat-menu-item (click)="openAssetInfoDialog(asset, true)">
-									<mat-icon mat-list-icon color="primary">edit</mat-icon>
-									Editar
+							<button mat-menu-item (click)="delete(asset.id)">
+								<mat-icon mat-list-icon color="warn">delete</mat-icon>
+								Remover
+							</button>
+							<button *ngIf="!asset.desactive?.desactivated; else activate" mat-menu-item (click)="openDesactiveDialog(asset)">
+								<mat-icon mat-list-icon color="gray">block</mat-icon>
+								Desativar
+							</button>
+							<ng-template #activate>
+								<button mat-menu-item (click)="reactive(asset)">
+									<mat-icon mat-list-icon style="color: #3DA35D">refresh</mat-icon>
+									Reativar
 								</button>
-								<button mat-menu-item (click)="delete(asset.id)">
-									<mat-icon mat-list-icon color="warn">delete</mat-icon>
-									Remover
-								</button>
-								<button *ngIf="!asset.desactive?.desactivated; else activate" mat-menu-item (click)="openDesactiveDialog(asset)">
-									<mat-icon mat-list-icon color="gray">block</mat-icon>
-									Desativar
-								</button>
-								<ng-template #activate>
-									<button mat-menu-item (click)="reactive(asset)">
-										<mat-icon mat-list-icon style="color: #3DA35D">refresh</mat-icon>
-										Reativar
-									</button>
-								</ng-template>
-							</mat-menu>
-						</mat-action-list>
+							</ng-template>
+						</mat-menu>
+					</td>
+				</ng-container>
 
-					</mat-list-item>
-				</mat-list>
-
-			</mat-nav-list>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
 			<ng-template #noList>
 				<p><i>Não há bens patrimoniais cadastrados</i></p>
 			</ng-template>
