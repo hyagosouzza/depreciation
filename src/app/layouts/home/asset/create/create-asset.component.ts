@@ -30,7 +30,7 @@ export class CreateAssetComponent implements OnInit {
 	}
 
 	private async _loadMetadados() {
-		this.categories = (await this._metadadosService.fetchAllAssets ()).data ().categories as AssetCategory[];
+		this.categories = (await this._metadadosService.fetchAllCategories ()).data ().categories as AssetCategory[];
 	}
 
 	private async _loadOrganizations() {

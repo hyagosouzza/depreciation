@@ -15,7 +15,7 @@ export class MetadadosService {
 	constructor(private readonly _db: AngularFirestore) {
 	}
 
-	fetchAllAssets(): Promise<DocumentSnapshot> {
+	fetchAllCategories(): Promise<DocumentSnapshot> {
 		return this._db.collection (META_DADOS).doc (ASSETS).ref.get ();
 	}
 }

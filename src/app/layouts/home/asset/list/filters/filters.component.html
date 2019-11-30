@@ -1,0 +1,25 @@
+<div class="flex-direction-row content-around">
+	<div>
+		<mat-form-field>
+			<input name="name" [(ngModel)]="name" (ngModelChange)="emitFilters()" matInput placeholder="Nome">
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<mat-select name="status" [(ngModel)]="status" (ngModelChange)="emitFilters()" placeholder="Status">
+				<mat-option disabled selected [value]="null">Selecione um status</mat-option>
+				<mat-option value="active">Ativado</mat-option>
+				<mat-option value="desactive">Desativado</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<mat-select name="category" [(ngModel)]="category" (ngModelChange)="emitFilters()" placeholder="Categoria">
+				<mat-option disabled selected [value]="null">Selecione uma categoria</mat-option>
+				<mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+</div>
+

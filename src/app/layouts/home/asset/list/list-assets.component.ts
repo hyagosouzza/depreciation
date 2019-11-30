@@ -3,12 +3,16 @@ import { AssetService } from '../../../../services/asset.service';
 import { Asset } from '../../../../models/asset.model';
 import { MatDialog } from '@angular/material';
 import { DesactiveAssetDialogComponent } from '../../../../shared/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
-import Timestamp = firebase.firestore.Timestamp;
-import * as firebase from 'firebase';
 import { ConfirmComponent } from '../../../../shared/dialogs/confirm/confirm.component';
 import { AssetInfoDialogComponent } from '../../../../shared/dialogs/asset-info-dialog/asset-info-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { OrganizationService } from '../../../../services/organization.service';
+import { MetadadosService } from '../../../../services/metadados.service';
+import { Organization } from '../../../../models/organization.model';
+import { AssetCategory } from '../../../../models/asset-category.model';
+import Timestamp = firebase.firestore.Timestamp;
+import * as firebase from 'firebase';
 
 @Component ({
 	selector: 'app-list',
@@ -18,20 +22,35 @@ import { MatSort } from '@angular/material/sort';
 export class ListAssetsComponent implements OnInit {
 
 	assets: Asset[];
+	organizations: Organization[];
+	categories: AssetCategory[];
 
-	displayedColumns: string[] = ['name', 'category', 'value', 'date', 'options'];
+	displayedColumns: string[] = ['organization', 'name', 'category', 'value', 'date', 'options'];
 	dataSource: MatTableDataSource<Asset>;
 
 	@ViewChild (MatSort, { static: true }) sort: MatSort;
 
 	constructor(private readonly _assetService: AssetService,
-				public dialog: MatDialog) { }
+				private readonly _organizationService: OrganizationService,
+				private readonly _metadadosService: MetadadosService,
+				public dialog: MatDialog) {
+		this._loadOrganizations ();
+		this._loadCategories ();
+	}
 
 	ngOnInit() {
 		if (this.dataSource) {
 			this.dataSource.sort = this.sort;
 		}
 		this._loadAssets ();
+	}
+
+	private async _loadOrganizations() {
+		this.organizations = this._organizationService.fetchAll ();
+	}
+
+	private async _loadCategories() {
+		this.categories = (await this._metadadosService.fetchAllCategories ()).data ().categories as AssetCategory[];
 	}
 
 	private async _loadAssets() {
@@ -100,6 +119,47 @@ export class ListAssetsComponent implements OnInit {
 				this._loadAssets ();
 			}
 		});
+	}
+
+	organizationNameById(id: string): string {
+		const org = this.organizations.find (org => {
+			return org.id === id;
+		});
+
+		return org ? org.name : 'Não infomado';
+
+	}
+
+	categoryByName(name: string): AssetCategory {
+		return this.categories.find (category => {
+			return category.name === name;
+		})
+	}
+
+	textAboutCategory(name: string): string {
+		const category = this.categoryByName (name);
+
+		return category ? 'Vida útil: ' + category.lifeTime + ' anos, ' + 'Depreciação anual: ' + category.annualRate + '%' : 'Não informado';
+	}
+
+	applyFilter(filter: string) {
+		console.log (filter);
+		this.dataSource.filterPredicate = this.tableFilter ();
+		this.dataSource.filter = filter;
+	}
+
+	tableFilter(): (data: Asset, filter: string) => boolean {
+		return function (data, filter): boolean {
+			const searchTerms = JSON.parse (filter);
+			const aboutDesactive = searchTerms.status != 'active';
+
+			const matchName = data.name.toLowerCase ().indexOf ((searchTerms.name || '').toLowerCase ()) !== - 1;
+			const matchCategory = data.category.indexOf (searchTerms.category || '') !== - 1;
+			const matchStatus = searchTerms.status && searchTerms.status.length > 0 ?
+					data.desactive.desactivated == aboutDesactive : true;
+
+			return matchName && matchCategory && matchStatus;
+		};
 	}
 
 }

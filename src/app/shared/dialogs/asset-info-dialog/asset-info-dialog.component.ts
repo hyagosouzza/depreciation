@@ -33,12 +33,12 @@ export class AssetInfoDialogComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this._loadAssets ();
+		this._loadCategories ();
 		this._loadOrganizations ();
 	}
 
-	private async _loadAssets() {
-		this.categories = (await this._metadadosService.fetchAllAssets ()).data ().categories as AssetCategory[];
+	private async _loadCategories() {
+		this.categories = (await this._metadadosService.fetchAllCategories ()).data ().categories as AssetCategory[];
 	}
 
 	private async _loadOrganizations() {
