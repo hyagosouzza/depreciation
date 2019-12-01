@@ -143,7 +143,6 @@ export class ListAssetsComponent implements OnInit {
 	}
 
 	applyFilter(filter: string) {
-		console.log (filter);
 		this.dataSource.filterPredicate = this.tableFilter ();
 		this.dataSource.filter = filter;
 	}
