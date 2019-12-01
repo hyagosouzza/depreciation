@@ -29,6 +29,7 @@ export class AssetInfoDialogComponent implements OnInit {
 			@Inject (MAT_DIALOG_DATA) public data: any
 	) {
 		this.asset = data.asset;
+		this.date = this.asset.date.toDate ();
 		this.editing = data.editing;
 	}
 

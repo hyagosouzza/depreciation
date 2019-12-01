@@ -52,7 +52,7 @@
 	<div *ngIf="!editing && asset.desactive?.desactivated">
 		<h3 class="gray-color">Desativado</h3>
 		<p class="gray-color"><b>Motivo:</b> {{ asset.desactive?.reason }}</p>
-		<p class="gray-color"><b>Data de Desativação:</b> {{ asset.desactive?.date.toDate().toLocaleDateString()}}</p>
+		<p class="gray-color"><b>Data de Desativação:</b> {{ asset.desactive?.date.toDate() | date: 'dd/MM/yyyy'}}</p>
 	</div>
 </div>
 <div *ngIf="editing" mat-dialog-actions class="content-between">

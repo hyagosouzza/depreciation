@@ -15,11 +15,14 @@
 	</div>
 	<div>
 		<mat-form-field>
-			<mat-select name="category" [(ngModel)]="category" (ngModelChange)="emitFilters()" placeholder="Categoria">
+			<mat-select name="category" multiple [(ngModel)]="category" (ngModelChange)="emitFilters()" placeholder="Categoria">
 				<mat-option disabled selected [value]="null">Selecione uma categoria</mat-option>
 				<mat-option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</mat-option>
 			</mat-select>
 		</mat-form-field>
+	</div>
+	<div style="width: 50%">
+		<button mat-raised-button (click)="clearFilters()">Limpar</button>
 	</div>
 </div>
 

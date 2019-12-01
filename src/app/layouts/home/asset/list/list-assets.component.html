@@ -7,11 +7,11 @@
 		<mat-card-content style="width: 90%">
 			<app-filters (filters)="applyFilter($event)"></app-filters>
 
-			<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+			<table *ngIf="assets && assets.length > 0; else noList" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
 				<ng-container matColumnDef="organization">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> Organização</th>
-					<td style="cursor: pointer" mat-cell *matCellDef="let asset"> {{ organizationNameById(asset.organization) }} </td>
+					<td mat-cell *matCellDef="let asset"> {{ organizationNameById(asset.organization) }} </td>
 				</ng-container>
 
 				<ng-container matColumnDef="name">
@@ -29,7 +29,7 @@
 
 				<ng-container matColumnDef="value">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> Valor</th>
-					<td mat-cell *matCellDef="let asset"> {{asset.value | currency}} </td>
+					<td mat-cell *matCellDef="let asset"> R$ {{asset.value}} </td>
 				</ng-container>
 
 				<ng-container matColumnDef="date">
@@ -67,7 +67,7 @@
 				</ng-container>
 
 				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'make-desactive': row.desactive?.desactivated }"></tr>
 			</table>
 			<ng-template #noList>
 				<p><i>Não há bens patrimoniais cadastrados</i></p>

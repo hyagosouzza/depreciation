@@ -153,7 +153,7 @@ export class ListAssetsComponent implements OnInit {
 			const aboutDesactive = searchTerms.status != 'active';
 
 			const matchName = data.name.toLowerCase ().indexOf ((searchTerms.name || '').toLowerCase ()) !== - 1;
-			const matchCategory = data.category.indexOf (searchTerms.category || '') !== - 1;
+			const matchCategory = !searchTerms.category || searchTerms.category.length <= 0 ? true : searchTerms.category.includes (data.category);
 			const matchStatus = searchTerms.status && searchTerms.status.length > 0 ?
 					data.desactive.desactivated == aboutDesactive : true;
 

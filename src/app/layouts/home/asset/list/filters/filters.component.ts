@@ -13,7 +13,7 @@ export class FiltersComponent implements OnInit {
 
 	name: string;
 	status: string;
-	category: string;
+	category: string[];
 
 	categories: AssetCategory[];
 
@@ -33,6 +33,13 @@ export class FiltersComponent implements OnInit {
 			category: this.category,
 			status: this.status
 		}));
+	}
+
+	clearFilters() {
+		this.name = '';
+		this.category = [];
+		this.status = '';
+		this.emitFilters ();
 	}
 
 }
