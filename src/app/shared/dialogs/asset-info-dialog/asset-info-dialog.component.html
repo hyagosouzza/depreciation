@@ -24,7 +24,7 @@
 			</div>
 			<div>
 				<mat-form-field>
-					<input [disabled]="!editing" name="date" [(ngModel)]="date" (ngModelChange)="formatDate()" required matInput [matDatepicker]="picker" [placeholder]="placeholderDate">
+					<input [max]="maxDate" [disabled]="!editing" name="date" [(ngModel)]="date" (ngModelChange)="formatDate()" required matInput [matDatepicker]="picker" [placeholder]="placeholderDate | date:'dd/MM/yyyy'">
 					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 					<mat-datepicker #picker></mat-datepicker>
 				</mat-form-field>

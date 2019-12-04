@@ -18,6 +18,7 @@ export class CreateAssetComponent implements OnInit {
 
 	categories: AssetCategory[];
 	organizations: Organization[];
+	maxDate: Date = new Date ();
 
 	constructor(private readonly _metadadosService: MetadadosService,
 				private readonly _organizationService: OrganizationService,
@@ -39,7 +40,7 @@ export class CreateAssetComponent implements OnInit {
 
 	createAsset(form: NgForm) {
 		this._assetService.create (this.asset);
-		form.reset ();
+		form.resetForm ();
 	}
 
 }

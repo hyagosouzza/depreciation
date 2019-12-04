@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AssetService } from '../../../../services/asset.service';
 import { Asset } from '../../../../models/asset.model';
 import { MatDialog } from '@angular/material';
@@ -13,6 +13,9 @@ import { Organization } from '../../../../models/organization.model';
 import { AssetCategory } from '../../../../models/asset-category.model';
 import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
+import { DepreciationDialogComponent } from '../../../../shared/dialogs/depreciation-dialog/depreciation-dialog.component';
+import { DepreciationCalcService } from '../../../../services/depreciation-calc.service';
+import * as moment from 'moment';
 
 @Component ({
 	selector: 'app-list',
@@ -24,8 +27,9 @@ export class ListAssetsComponent implements OnInit {
 	assets: Asset[];
 	organizations: Organization[];
 	categories: AssetCategory[];
+	shortDepreciations: any[] = [];
 
-	displayedColumns: string[] = ['organization', 'name', 'category', 'value', 'date', 'options'];
+	displayedColumns: string[] = ['organization', 'name', 'category', 'value', 'depreciation', 'date', 'options'];
 	dataSource: MatTableDataSource<Asset>;
 
 	@ViewChild (MatSort, { static: true }) sort: MatSort;
@@ -33,15 +37,13 @@ export class ListAssetsComponent implements OnInit {
 	constructor(private readonly _assetService: AssetService,
 				private readonly _organizationService: OrganizationService,
 				private readonly _metadadosService: MetadadosService,
+				private readonly _depreciationCalcService: DepreciationCalcService,
 				public dialog: MatDialog) {
 		this._loadOrganizations ();
 		this._loadCategories ();
 	}
 
 	ngOnInit() {
-		if (this.dataSource) {
-			this.dataSource.sort = this.sort;
-		}
 		this._loadAssets ();
 	}
 
@@ -61,6 +63,8 @@ export class ListAssetsComponent implements OnInit {
 			return asset;
 		}) as Asset[];
 		this.dataSource = new MatTableDataSource (this.assets);
+		this.dataSource.sort = this.sort;
+		this._calcShortDepreciation ();
 	}
 
 	delete(id: string) {
@@ -92,7 +96,6 @@ export class ListAssetsComponent implements OnInit {
 					desactivated: true,
 				};
 				this._assetService.update (asset);
-				this._loadAssets ();
 			}
 		});
 	}
@@ -117,6 +120,15 @@ export class ListAssetsComponent implements OnInit {
 			if (result) {
 				this._assetService.update (result);
 				this._loadAssets ();
+			}
+		});
+	}
+
+	openDepreciationDialog(asset: Asset) {
+		const dialogRef = this.dialog.open (DepreciationDialogComponent, {
+			width: '900px',
+			data: {
+				asset,
 			}
 		});
 	}
@@ -159,6 +171,36 @@ export class ListAssetsComponent implements OnInit {
 
 			return matchName && matchCategory && matchStatus;
 		};
+	}
+
+	private _calcShortDepreciation() {
+		this.assets.forEach (asset => {
+			const category = this.categories.find (categ => {
+				return categ.name === asset.category
+			});
+
+			const shortDepreciation = this._depreciationCalcService.calcShortDepreciation (asset, category);
+
+			const newValue: number = shortDepreciation.value;
+			const percent: number = shortDepreciation.percent * 100;
+			const fullyDeprecated: boolean = shortDepreciation.fullyDeprecated;
+
+			if (fullyDeprecated) {
+				this.shortDepreciations.push ({
+					message: 'Depreciado',
+					fullyDeprecated: fullyDeprecated,
+				});
+			} else {
+				this.shortDepreciations.push ({
+					message: 'R$' + newValue.toFixed (2) + ' (' + percent.toFixed (2) + '%)',
+					fullyDeprecated: fullyDeprecated,
+				});
+			}
+		});
+	}
+
+	getAssetIndex(asset: Asset) {
+		return this.assets.indexOf (asset);
 	}
 
 }

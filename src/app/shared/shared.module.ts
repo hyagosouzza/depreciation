@@ -15,10 +15,13 @@ import { DesactiveAssetDialogComponent } from './dialogs/desactive-asset-dialog/
 import { MatDatepickerModule, MatSelectModule } from '@angular/material';
 import { AssetInfoDialogComponent } from './dialogs/asset-info-dialog/asset-info-dialog.component';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { DepreciationDialogComponent } from './dialogs/depreciation-dialog/depreciation-dialog.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule ({
-	declarations: [NavbarComponent, CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent],
+	declarations: [NavbarComponent, CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent, DepreciationDialogComponent],
 	imports: [
 		CommonModule,
 		MatToolbarModule,
@@ -31,7 +34,9 @@ import { NgxCurrencyModule } from 'ngx-currency';
 		MatButtonModule,
 		MatSelectModule,
 		MatDatepickerModule,
-		NgxCurrencyModule
+		NgxCurrencyModule,
+		NgxChartsModule,
+		MatCardModule
 	],
 	exports: [NavbarComponent]
 })

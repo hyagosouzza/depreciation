@@ -37,7 +37,7 @@ export class OrganizationListComponent implements OnInit {
 	openDialog(id: string): void {
 		const dialogRef = this.dialog.open (ConfirmComponent, {
 			width: '400px',
-			data: { title: 'Confirma Exclusão', message: 'Deseja mesmo remover esta organização?' }
+			data: { title: 'Confirma Exclusão', message: 'Deseja mesmo remover este setor?' }
 		});
 
 		dialogRef.afterClosed ().subscribe (result => {

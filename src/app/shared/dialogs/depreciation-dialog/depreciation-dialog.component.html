@@ -1,0 +1,24 @@
+<h1 class="gray-color" mat-dialog-title>Depreciação - {{asset?.name || 'Bem Patrimonial'}}</h1>
+<span class="gray-color" mat-card-subtitle>Método de cálculo linear ({{asset.value}} - (tempo de vida - {{category?.annualRate / 100}} * {{asset.value}})) / {{category?.lifeTime}}</span>
+<hr style="margin-top: 0; margin-bottom: 30px">
+<div mat-dialog-content>
+	<p><b>{{category?.name}}</b>, <i>Taxa de depreciação anual {{category?.annualRate}}% e Tempo de vida {{category?.lifeTime}} anos</i></p>
+	<br>
+	<ngx-charts-line-chart
+			[view]="view"
+			[scheme]="colorScheme"
+			[results]="values"
+			[gradient]="gradient"
+			[xAxis]="showXAxis"
+			[yAxis]="showYAxis"
+			[legend]="showLegend"
+			[showXAxisLabel]="showXAxisLabel"
+			[showYAxisLabel]="showYAxisLabel"
+			[xAxisLabel]="xAxisLabel"
+			[yAxisLabel]="yAxisLabel"
+			[timeline]="timeline"
+			[legendTitle]="legendTitle"
+			[yAxisTickFormatting]="formatValues"
+			(select)="onSelect($event)">
+	</ngx-charts-line-chart>
+</div>

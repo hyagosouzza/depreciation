@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class DesactiveAssetDialogComponent implements OnInit {
 
 	reason = '';
-	reasons = ['Extravio', 'Roubo', 'Furto', 'Perda', 'Acidente', 'Outros'];
+	reasons = ['Venda', 'Extravio', 'Roubo', 'Furto', 'Perda', 'Acidente', 'Outros'];
 
 	constructor(
 			public dialogRef: MatDialogRef<DesactiveAssetDialogComponent>,

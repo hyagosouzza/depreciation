@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import br from '@angular/common/locales/br';
+
+registerLocaleData (br, 'pt-BR');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,6 +47,9 @@ import { FiltersComponent } from './layouts/home/asset/list/filters/filters.comp
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DepreciationDialogComponent } from './shared/dialogs/depreciation-dialog/depreciation-dialog.component';
+import { CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
 
 @NgModule ({
 	declarations: [
@@ -66,6 +72,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 		NgxMaskModule.forRoot (),
 		NgxCurrencyModule,
+		NgxChartsModule,
 
 		RouterModule.forRoot ([]),
 		SharedModule,
@@ -98,8 +105,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 		AuthService,
 		OrganizationService,
 		MetadadosService,
+		DatePipe,
+		CurrencyPipe
 	],
-	entryComponents: [CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent],
+	entryComponents: [CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent, DepreciationDialogComponent],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

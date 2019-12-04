@@ -21,6 +21,7 @@ export class AssetInfoDialogComponent implements OnInit {
 
 	categories: AssetCategory[];
 	organizations: Organization[];
+	maxDate: Date = new Date ();
 
 	constructor(
 			private readonly _metadadosService: MetadadosService,
