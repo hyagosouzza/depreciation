@@ -7,6 +7,7 @@ import { AssetCategory } from '../models/asset-category.model';
 const META_DADOS = 'metadados';
 const ASSETS = 'assets';
 const METHODS = 'methods';
+const REASONS = 'reasons';
 
 @Injectable ({
 	providedIn: 'root'
@@ -24,6 +25,10 @@ export class MetadadosService {
 		return ((await this.fetchAllCategories ()).data ().categories as AssetCategory[]).find (categ => {
 			return categ.name == name;
 		});
+	}
+
+	async findAllReasons(): Promise<DocumentSnapshot> {
+		return this._db.collection (META_DADOS).doc (REASONS).ref.get ();
 	}
 }
 

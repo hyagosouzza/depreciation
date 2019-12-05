@@ -10,13 +10,13 @@
 		</div>
 		<div>
 			<mat-divider></mat-divider>
-			<h3 class="gray-color text-center">Depreciação acumulada por categoria</h3>
+			<h3 style="margin-top: 40px" class="gray-color text-center">Depreciação acumulada por categoria</h3>
 			<depreciation-horizontal-chart [values]="amountByCategory"></depreciation-horizontal-chart>
 		</div>
 		<div>
 			<mat-divider></mat-divider>
-			<h3 class="gray-color text-center">Patrimônio perdido por desativação</h3>
-			<depreciation-grouped-bar-chart [values]="desactivationGroupedByReason"></depreciation-grouped-bar-chart>
+			<h3 style="margin-top: 40px" class="gray-color text-center">Patrimônio perdido por desativação</h3>
+			<depreciation-bar-chart [values]="desactivationByReason"></depreciation-bar-chart>
 		</div>
 	</div>
 </mat-card>

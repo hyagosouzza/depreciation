@@ -39,16 +39,17 @@ export class ListAssetsComponent implements OnInit {
 				private readonly _metadadosService: MetadadosService,
 				private readonly _depreciationCalcService: DepreciationCalcService,
 				public dialog: MatDialog) {
-		this._loadOrganizations ();
 		this._loadCategories ();
 	}
 
-	ngOnInit() {
-		this._loadAssets ();
-	}
+	async ngOnInit() {
+		this.organizations = (await this._organizationService.fetchAllAsync ()).docs.map (doc => {
+			const org = doc.data ();
+			org.id = doc.id;
+			return org;
+		});
 
-	private async _loadOrganizations() {
-		this.organizations = this._organizationService.fetchAll ();
+		this._loadAssets ();
 	}
 
 	private async _loadCategories() {
@@ -59,8 +60,12 @@ export class ListAssetsComponent implements OnInit {
 		this.assets = (await this._assetService.fetchAll ()).docs.map (doc => {
 			let asset: Asset;
 			asset = doc.data () as Asset;
-			asset.id = doc.id;
-			return asset;
+
+			if (this.organizations.map (o => o.id).includes (asset.organization)) {
+				asset.id = doc.id;
+				return asset;
+			}
+
 		}) as Asset[];
 		this.dataSource = new MatTableDataSource (this.assets);
 		this.dataSource.sort = this.sort;

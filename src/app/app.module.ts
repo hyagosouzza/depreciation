@@ -51,7 +51,7 @@ import { DashboardComponent } from './layouts/home/dashboard/dashboard.component
 import { AdvancedPieChartComponent } from './layouts/home/dashboard/advanced-pie-chart/advanced-pie-chart.component';
 import { ChartConfigService } from './services/chart-config.service';
 import { HorizontalChartComponent } from './layouts/home/dashboard/horizontal-chart/horizontal-chart.component';
-import { GroupedBarChartComponent } from './layouts/home/dashboard/grouped-bar-chart/grouped-bar-chart.component';
+import { BarChartComponent } from './layouts/home/dashboard/grouped-bar-chart/bar-chart.component';
 
 registerLocaleData (br, 'pt-BR');
 
@@ -72,7 +72,7 @@ registerLocaleData (br, 'pt-BR');
 		DashboardComponent,
 		AdvancedPieChartComponent,
 		HorizontalChartComponent,
-		GroupedBarChartComponent,
+		BarChartComponent,
 	],
 	imports: [
 		BrowserModule,

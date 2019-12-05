@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
 	amountByOrganization: ChartDataValues[] = [];
 	amountByCategory: ChartDataValues[] = [];
-	desactivationGroupedByReason: ChartData[] = [];
+	desactivationByReason: ChartData[] = [];
 	organizations: Organization[];
 	categories: AssetCategory[];
 
@@ -34,16 +34,16 @@ export class DashboardComponent implements OnInit {
 
 		this._loadAmountByOrganizationsValues ();
 		this._loadDepreciationValueByCategory ();
-		this._loadDesactivationGroupedByReason ();
+		this._loadDesactivationByReason ();
 	}
 
-	private async _loadDesactivationGroupedByReason() {
+	private async _loadDesactivationByReason() {
 		for (const org of this.organizations) {
 			let assets: Asset[] = await this._loadAssetsFromOrganization (org);
 			assets = assets.filter (asset => {
 				return asset.desactive && asset.desactive.desactivated;
 			});
-			this.desactivationGroupedByReason = this._buildDesactivationGroupedByReason (assets);
+			this.desactivationByReason = this._buildDesactivationByReason (assets);
 		}
 	}
 
@@ -86,10 +86,9 @@ export class DashboardComponent implements OnInit {
 		return { name: organization.name, value: amount };
 	}
 
-	private _buildDesactivationGroupedByReason(assets: Asset[]): ChartDataValues[] {
+	private _buildDesactivationByReason(assets: Asset[]): ChartDataValues[] {
 		const chartDataValues: ChartDataValues[] = [];
 
-		debugger;
 		const desactivateGroups = groupBy (assets, 'desactive.reason');
 		for (let [key, value] of Object.entries (desactivateGroups)) {
 			chartDataValues.push ({ name: key, value: sum ((value as Asset[]).map (v => v.value)) });

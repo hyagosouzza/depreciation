@@ -7,7 +7,7 @@
 		<mat-card-content style="width: 90%">
 			<app-filters (filters)="applyFilter($event)"></app-filters>
 
-			<table [hidden]="!assets || assets.length <= 0" style="margin-top: 20px" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+			<table [hidden]="!assets || assets.length <= 0" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 assets-list-table">
 
 				<ng-container matColumnDef="organization">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header> Setor</th>

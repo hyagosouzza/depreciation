@@ -3,11 +3,11 @@ import { ChartDataValues } from '../../../../models/chart-data.model';
 import { ChartConfigService } from '../../../../services/chart-config.service';
 
 @Component ({
-	selector: 'depreciation-grouped-bar-chart',
-	templateUrl: './grouped-bar-chart.component.html',
-	styleUrls: ['./grouped-bar-chart.component.scss']
+	selector: 'depreciation-bar-chart',
+	templateUrl: './bar-chart.component.html',
+	styleUrls: ['./bar-chart.component.scss']
 })
-export class GroupedBarChartComponent implements OnInit {
+export class BarChartComponent implements OnInit {
 
 	@Input () values: ChartDataValues[];
 
@@ -21,7 +21,7 @@ export class GroupedBarChartComponent implements OnInit {
 	showXAxisLabel = this._chartConfigService.showXAxisLabel;
 	xAxisLabel = 'Motivo';
 	showYAxisLabel = this._chartConfigService.showYAxisLabel;
-	yAxisLabel = 'Quantidade';
+	yAxisLabel = 'Valor perdido';
 	legendTitle = this._chartConfigService.legendTitle;
 
 	colorScheme = this._chartConfigService.thirdyColorScheme;

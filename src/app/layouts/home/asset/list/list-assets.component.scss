@@ -19,3 +19,28 @@ th.mat-sort-header-sorted {
 .make-desactive {
 	background-color: #cccccc7a;
 }
+
+.assets-list-table {
+	margin-top: 20px;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+th, td {
+	overflow: hidden;
+	width: auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+th.mat-header-cell:last-of-type {
+	padding-right: 0;
+	width: 50px;
+}
+
+.main-card {
+	width: 80%;
+}

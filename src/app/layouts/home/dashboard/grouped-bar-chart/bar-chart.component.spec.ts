@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupedBarChartComponent } from './grouped-bar-chart.component';
+import { BarChartComponent } from './bar-chart.component';
 
 describe ('GroupedBarChartComponent', () => {
-	let component: GroupedBarChartComponent;
-	let fixture: ComponentFixture<GroupedBarChartComponent>;
+	let component: BarChartComponent;
+	let fixture: ComponentFixture<BarChartComponent>;
 
 	beforeEach (async (() => {
 		TestBed.configureTestingModule ({
-			declarations: [GroupedBarChartComponent]
+			declarations: [BarChartComponent]
 		})
 				.compileComponents ();
 	}));
 
 	beforeEach (() => {
-		fixture = TestBed.createComponent (GroupedBarChartComponent);
+		fixture = TestBed.createComponent (BarChartComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges ();
 	});
