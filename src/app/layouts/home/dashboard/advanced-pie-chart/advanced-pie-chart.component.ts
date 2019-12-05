@@ -23,4 +23,13 @@ export class AdvancedPieChartComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	formatValues(value) {
+		const formatter = new Intl.NumberFormat ('pt-BR', {
+			style: 'currency',
+			currency: 'BRL',
+			maximumSignificantDigits: 2
+		});
+		return formatter.format (value);
+	}
+
 }
