@@ -1,0 +1,22 @@
+<mat-card>
+	<mat-card-title>
+		<span class="gray-color">Dashboard</span>
+		<hr>
+	</mat-card-title>
+	<div class="content-row flex-direction-column">
+		<div>
+			<h3 class="gray-color text-center">Patrimônio acumulado por setor</h3>
+			<depreciation-advanced-pie-chart [values]="amountByOrganization"></depreciation-advanced-pie-chart>
+		</div>
+		<div>
+			<mat-divider></mat-divider>
+			<h3 class="gray-color text-center">Depreciação acumulada por categoria</h3>
+			<depreciation-horizontal-chart [values]="amountByCategory"></depreciation-horizontal-chart>
+		</div>
+		<div>
+			<mat-divider></mat-divider>
+			<h3 class="gray-color text-center">Patrimônio perdido por desativação</h3>
+			<depreciation-grouped-bar-chart [values]="desactivationGroupedByReason"></depreciation-grouped-bar-chart>
+		</div>
+	</div>
+</mat-card>

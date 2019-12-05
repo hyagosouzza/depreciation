@@ -2,9 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AssetService } from '../../../../services/asset.service';
 import { Asset } from '../../../../models/asset.model';
 import { MatDialog } from '@angular/material';
-import { DesactiveAssetDialogComponent } from '../../../../shared/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
-import { ConfirmComponent } from '../../../../shared/dialogs/confirm/confirm.component';
-import { AssetInfoDialogComponent } from '../../../../shared/dialogs/asset-info-dialog/asset-info-dialog.component';
+import { DesactiveAssetDialogComponent } from '../../dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
+import { ConfirmComponent } from '../../dialogs/confirm/confirm.component';
+import { AssetInfoDialogComponent } from '../../dialogs/asset-info-dialog/asset-info-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { OrganizationService } from '../../../../services/organization.service';
@@ -13,7 +13,7 @@ import { Organization } from '../../../../models/organization.model';
 import { AssetCategory } from '../../../../models/asset-category.model';
 import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
-import { DepreciationDialogComponent } from '../../../../shared/dialogs/depreciation-dialog/depreciation-dialog.component';
+import { DepreciationDialogComponent } from '../../dialogs/depreciation-dialog/depreciation-dialog.component';
 import { DepreciationCalcService } from '../../../../services/depreciation-calc.service';
 import * as moment from 'moment';
 
@@ -192,7 +192,7 @@ export class ListAssetsComponent implements OnInit {
 				});
 			} else {
 				this.shortDepreciations.push ({
-					message: 'R$' + newValue.toFixed (2) + ' (' + percent.toFixed (2) + '%)',
+					message: 'R$' + newValue.toFixed (2) + ' (' + percent.toFixed (1) + '%)',
 					fullyDeprecated: fullyDeprecated,
 				});
 			}

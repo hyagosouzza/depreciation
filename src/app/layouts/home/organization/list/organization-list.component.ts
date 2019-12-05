@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Organization } from '../../../../models/organization.model';
-import { ConfirmComponent } from '../../../../shared/dialogs/confirm/confirm.component';
+import { ConfirmComponent } from '../../dialogs/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationService } from '../../../../services/organization.service';
+import { AssetService } from '../../../../services/asset.service';
 
 @Component ({
 	selector: 'app-organization-list',
@@ -15,19 +16,32 @@ export class OrganizationListComponent implements OnInit {
 	@Output () deleteOrganization = new EventEmitter ();
 
 	organizations: Organization[];
+	counts: number[] = [];
 	orgToEdit: string;
 	name = '';
 
 	constructor(public dialog: MatDialog,
 				private readonly _organizationService: OrganizationService,
+				private readonly _assetService: AssetService,
 	) { }
 
 	ngOnInit() {
 		this.fetchOrganizations ();
 	}
 
-	fetchOrganizations() {
-		this.organizations = this._organizationService.fetchAll ();
+	async fetchOrganizations() {
+		this.organizations = (await this._organizationService.fetchAllAsync ()).docs.map (doc => {
+			const org = doc.data ();
+			org.id = doc.id;
+			return org;
+		});
+		this._loadCounts ();
+	}
+
+	private _loadCounts() {
+		this.organizations.forEach (async org => {
+			this.counts.push ((await this._assetService.fetchAllFromOrganization (org)).size);
+		});
 	}
 
 	toogleEdit(id?: string) {
@@ -54,6 +68,10 @@ export class OrganizationListComponent implements OnInit {
 		this._organizationService.updateOrganization (organization);
 		this.toogleEdit ();
 		this.fetchOrganizations ();
+	}
+
+	getCount(organization: Organization) {
+		return this.counts[this.organizations.indexOf (organization)];
 	}
 
 }

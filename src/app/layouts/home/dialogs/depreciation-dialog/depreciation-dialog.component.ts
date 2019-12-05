@@ -1,11 +1,12 @@
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Asset } from '../../../models/asset.model';
-import { DepreciationCalcService } from '../../../services/depreciation-calc.service';
-import { ChartData } from '../../../models/chart-data.model';
-import { MetadadosService } from '../../../services/metadados.service';
-import { AssetCategory } from '../../../models/asset-category.model';
+import { Asset } from '../../../../models/asset.model';
+import { DepreciationCalcService } from '../../../../services/depreciation-calc.service';
+import { ChartData } from '../../../../models/chart-data.model';
+import { MetadadosService } from '../../../../services/metadados.service';
+import { AssetCategory } from '../../../../models/asset-category.model';
 import { CurrencyPipe, DatePipe, formatCurrency, formatDate, formatNumber, getLocaleId } from '@angular/common';
+import { ChartConfigService } from '../../../../services/chart-config.service';
 
 @Component ({
 	selector: 'depreciation-depreciation-dialog',
@@ -19,20 +20,18 @@ export class DepreciationDialogComponent implements OnInit {
 	view: any[] = [800, 350];
 
 	// options
-	showXAxis = true;
-	showYAxis = true;
-	gradient = false;
-	showLegend = true;
-	showXAxisLabel = true;
-	xAxisLabel = 'Data';
-	showYAxisLabel = true;
-	yAxisLabel = 'Valor';
-	legendTitle = 'Legenda';
-	timeline = true;
+	showXAxis = this._chartConfigService.showXAxis;
+	showYAxis = this._chartConfigService.showYAxis;
+	gradient = this._chartConfigService.gradient;
+	showLegend = this._chartConfigService.showLegend;
+	showXAxisLabel = this._chartConfigService.showXAxisLabel;
+	xAxisLabel = this._chartConfigService.xAxisLabel;
+	showYAxisLabel = this._chartConfigService.showYAxisLabel;
+	yAxisLabel = this._chartConfigService.yAxisLabel;
+	legendTitle = this._chartConfigService.legendTitle;
+	timeline = this._chartConfigService.timeline;
 
-	colorScheme = {
-		domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-	};
+	colorScheme = this._chartConfigService.primaryColorScheme;
 
 	values: ChartData[] = [];
 
@@ -44,6 +43,7 @@ export class DepreciationDialogComponent implements OnInit {
 			private readonly _depreciationCalcService: DepreciationCalcService,
 			private readonly _metadadosService: MetadadosService,
 			@Inject (LOCALE_ID) private _locale: string,
+			private readonly _chartConfigService: ChartConfigService,
 	) {
 		this.asset = data.asset;
 		this._loadDepreciationCalc ();

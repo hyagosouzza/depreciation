@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import br from '@angular/common/locales/br';
-
-registerLocaleData (br, 'pt-BR');
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
@@ -24,32 +21,39 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { CreateOrganizationComponent } from './shared/dialogs/create-organization/create-organization.component';
+import { CreateOrganizationComponent } from './layouts/home/dialogs/create-organization/create-organization.component';
 import { OrganizationService } from './services/organization.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MenuComponent } from './layouts/home/menu/menu.component';
 import { OrganizationListComponent } from './layouts/home/organization/list/organization-list.component';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ConfirmComponent } from './shared/dialogs/confirm/confirm.component';
+import { ConfirmComponent } from './layouts/home/dialogs/confirm/confirm.component';
 import { ProfileComponent } from './layouts/home/profile/profile.component';
 import { HomeComponent } from './layouts/home/home/home.component';
 import { CreateAssetComponent } from './layouts/home/asset/create/create-asset.component';
 import { ListAssetsComponent } from './layouts/home/asset/list/list-assets.component';
 import { MatDatepickerModule, MatMenuModule, MatNativeDateModule, MatOptionModule, MatSelectModule } from '@angular/material';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { MetadadosService } from './services/metadados.service';
 import { NgxCurrencyModule } from 'ngx-currency';
-import { DesactiveAssetDialogComponent } from './shared/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
-import { AssetInfoDialogComponent } from './shared/dialogs/asset-info-dialog/asset-info-dialog.component';
+import { DesactiveAssetDialogComponent } from './layouts/home/dialogs/desactive-asset-dialog/desactive-asset-dialog.component';
+import { AssetInfoDialogComponent } from './layouts/home/dialogs/asset-info-dialog/asset-info-dialog.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FiltersComponent } from './layouts/home/asset/list/filters/filters.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DepreciationDialogComponent } from './shared/dialogs/depreciation-dialog/depreciation-dialog.component';
+import { DepreciationDialogComponent } from './layouts/home/dialogs/depreciation-dialog/depreciation-dialog.component';
 import { CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
+import { DashboardComponent } from './layouts/home/dashboard/dashboard.component';
+import { AdvancedPieChartComponent } from './layouts/home/dashboard/advanced-pie-chart/advanced-pie-chart.component';
+import { ChartConfigService } from './services/chart-config.service';
+import { HorizontalChartComponent } from './layouts/home/dashboard/horizontal-chart/horizontal-chart.component';
+import { GroupedBarChartComponent } from './layouts/home/dashboard/grouped-bar-chart/grouped-bar-chart.component';
+
+registerLocaleData (br, 'pt-BR');
 
 @NgModule ({
 	declarations: [
@@ -65,6 +69,10 @@ import { CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
 		CreateAssetComponent,
 		ListAssetsComponent,
 		FiltersComponent,
+		DashboardComponent,
+		AdvancedPieChartComponent,
+		HorizontalChartComponent,
+		GroupedBarChartComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -106,7 +114,8 @@ import { CurrencyPipe, DatePipe, registerLocaleData } from '@angular/common';
 		OrganizationService,
 		MetadadosService,
 		DatePipe,
-		CurrencyPipe
+		CurrencyPipe,
+		ChartConfigService,
 	],
 	entryComponents: [CreateOrganizationComponent, ConfirmComponent, DesactiveAssetDialogComponent, AssetInfoDialogComponent, DepreciationDialogComponent],
 	bootstrap: [AppComponent]

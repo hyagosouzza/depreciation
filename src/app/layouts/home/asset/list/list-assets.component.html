@@ -78,7 +78,7 @@
 				</ng-container>
 
 				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-				<tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'make-desactive': row.desactive?.desactivated }"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'make-desactive': row?.desactive?.desactivated }"></tr>
 			</table>
 			<p *ngIf="!assets || assets.length <= 0"><i>Não há bens patrimoniais cadastrados</i></p>
 		</mat-card-content>

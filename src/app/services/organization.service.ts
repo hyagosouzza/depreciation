@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
 import { Organization } from '../models/organization.model';
+import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import * as firebase from 'firebase';
 
 const ORGANIZATION = 'organization';
 
@@ -48,6 +50,10 @@ export class OrganizationService {
 				});
 
 		return organizations;
+	}
+
+	fetchAllAsync(): Promise<QuerySnapshot> {
+		return this._db.collection (ORGANIZATION).ref.where ('user', '==', this.user.id).get ()
 	}
 
 	deleteOrganization(id: string) {

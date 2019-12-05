@@ -8,6 +8,7 @@ import { ProfileComponent } from './layouts/home/profile/profile.component';
 import { HomeComponent } from './layouts/home/home/home.component';
 import { CreateAssetComponent } from './layouts/home/asset/create/create-asset.component';
 import { ListAssetsComponent } from './layouts/home/asset/list/list-assets.component';
+import { DashboardComponent } from './layouts/home/dashboard/dashboard.component';
 
 const routes: Routes = [
 	{
@@ -15,6 +16,7 @@ const routes: Routes = [
 		component: MainLayoutComponent,
 		children: [
 			{ path: '', component: HomeComponent },
+			{ path: 'dashboard', component: DashboardComponent },
 			{ path: 'profile', component: ProfileComponent },
 			{ path: 'bens', component: ListAssetsComponent },
 			{ path: 'bens/novo', component: CreateAssetComponent },

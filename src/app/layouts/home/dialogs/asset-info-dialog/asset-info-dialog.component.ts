@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Asset } from '../../../models/asset.model';
-import { MetadadosService } from '../../../services/metadados.service';
-import { OrganizationService } from '../../../services/organization.service';
-import { AssetCategory } from '../../../models/asset-category.model';
-import { Organization } from '../../../models/organization.model';
+import { Asset } from '../../../../models/asset.model';
+import { MetadadosService } from '../../../../services/metadados.service';
+import { OrganizationService } from '../../../../services/organization.service';
+import { AssetCategory } from '../../../../models/asset-category.model';
+import { Organization } from '../../../../models/organization.model';
 import Timestamp = firebase.firestore.Timestamp;
 import * as firebase from 'firebase';
 

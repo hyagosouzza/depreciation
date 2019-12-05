@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Asset } from '../models/asset.model';
 import * as firebase from 'firebase';
 import QuerySnapshot = firebase.firestore.QuerySnapshot;
+import { Organization } from '../models/organization.model';
 
 const ASSET = 'asset';
 
@@ -22,6 +23,10 @@ export class AssetService {
 
 	fetchAll(): Promise<QuerySnapshot> {
 		return this._db.collection (ASSET).ref.get ();
+	}
+
+	async fetchAllFromOrganization(organization: Organization): Promise<QuerySnapshot> {
+		return this._db.collection (ASSET).ref.where ('organization', '==', organization.id).get ();
 	}
 
 	delete(id: string) {

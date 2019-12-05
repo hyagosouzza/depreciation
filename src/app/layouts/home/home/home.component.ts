@@ -3,7 +3,7 @@ import { Organization } from '../../../models/organization.model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationService } from '../../../services/organization.service';
-import { CreateOrganizationComponent } from '../../../shared/dialogs/create-organization/create-organization.component';
+import { CreateOrganizationComponent } from '../dialogs/create-organization/create-organization.component';
 
 @Component ({
 	selector: 'app-home',
