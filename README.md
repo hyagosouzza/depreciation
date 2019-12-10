@@ -1,27 +1,13 @@
-# App
+# Depreciation - Assets Management
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.13.
+Este projeto foi feito para a disciplina de ENGENHARIA ECONÔMICA PARA SOFTWARE, BES - INF - UFG, 2019/2.
 
-## Development server
+## O Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+O projeto tem por finalidade construir uma aplicação web que gerencie os bens patrimoniais de uma organização. O sistema é capaz de retornar informações sobre a vida útil de cada bem cadastrado, suas informações cadastrais, valor de mercado, taxa de depreciação, depreciação atual, etc. O software também possui o conceito de multi-setores, isto é, uma organização/empresa pode ter vários setores cadastrados no sistema, cada bem patrimonial deve pertencer a um determinado setor para que possa ser feito o seu controle.
 
-## Code scaffolding
+O projeto também conta com um dashboard que dispõe gráficos estratégicos à gerência de ativos organizacionais.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Aplicação
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+https://depreciation-app.herokuapp.com/
