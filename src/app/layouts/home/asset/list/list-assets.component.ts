@@ -61,15 +61,22 @@ export class ListAssetsComponent implements OnInit {
 			let asset: Asset;
 			asset = doc.data () as Asset;
 
-			if (this.organizations.map (o => o.id).includes (asset.organization)) {
-				asset.id = doc.id;
-				return asset;
-			}
+			asset.id = doc.id;
+			return asset;
 
 		}) as Asset[];
+		this._filterAssets ();
 		this.dataSource = new MatTableDataSource (this.assets);
 		this.dataSource.sort = this.sort;
 		this._calcShortDepreciation ();
+	}
+
+	private _filterAssets() {
+		this.assets = this.assets.filter (asset => {
+			if (this.organizations.map (o => o.id).includes (asset.organization)) {
+				return asset;
+			}
+		})
 	}
 
 	delete(id: string) {
@@ -124,7 +131,6 @@ export class ListAssetsComponent implements OnInit {
 		dialogRef.afterClosed ().subscribe (result => {
 			if (result) {
 				this._assetService.update (result);
-				this._loadAssets ();
 			}
 		});
 	}

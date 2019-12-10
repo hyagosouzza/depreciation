@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
 			assets = assets.filter (asset => {
 				return asset.desactive && asset.desactive.desactivated;
 			});
-			this.desactivationByReason = this._buildDesactivationByReason (assets);
+			this.desactivationByReason = this._buildDesactivationByReason (assets).concat (this.desactivationByReason);
 		}
 	}
 
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
 			assets = assets.filter (asset => {
 				return !asset.desactive || !asset.desactive.desactivated;
 			});
-			this.amountByCategory = this._buildDepreciationChartData (assets);
+			this.amountByCategory = this._buildDepreciationChartData (assets).concat (this.amountByCategory);
 		}
 	}
 

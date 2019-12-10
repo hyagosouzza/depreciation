@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
 		dialogRef.afterClosed ().subscribe (result => {
 			if (result) {
 				this._organizationService.createOrganization (result);
+				this.fetchOrganizations ();
 			}
 		});
 	}
